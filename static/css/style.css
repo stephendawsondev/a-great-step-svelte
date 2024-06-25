@@ -1,0 +1,547 @@
+@font-face {
+  font-family: "Catamaran";
+  font-style: normal;
+  font-weight: 300;
+  src: url("../fonts/Catamaran/static/Catamaran-ExtraLight.ttf")
+    format("truetype");
+}
+
+@font-face {
+  font-family: "Catamaran";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/Catamaran/static/Catamaran-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Catamaran";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../fonts/Catamaran/static/Catamaran-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Exo";
+  font-style: italic;
+  font-weight: 400;
+  src: url("../fonts/Exo/static/Exo-Italic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Exo";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/Exo/static/Exo-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Exo";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../fonts/Exo/static/Exo-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Lobster Two";
+  font-style: normal;
+  font-weight: 500;
+  src: url("../fonts/Lobster_Two/LobsterTwo-Bold.ttf") format("truetype");
+}
+
+/* Global styles */
+:root {
+  font-size: 20px;
+}
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #bffffc26;
+  color: #36454f;
+  font-family: "Catamaran", sans-serif;
+}
+
+:focus {
+  outline-color: #4a9cbf;
+}
+
+.app-container {
+  scroll-behavior: smooth;
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+}
+
+section {
+  min-height: 100vh;
+  align-items: center;
+  display: flex;
+  padding: 2em 0;
+}
+
+section * {
+  box-sizing: border-box;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.image-container {
+  width: 75%;
+  margin: 0 auto;
+}
+
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+h2,
+h3 {
+  font-family: "Exo", sans-serif;
+  font-weight: 500;
+  margin: 0.5em 0;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.45rem;
+}
+
+.btn {
+  display: inline-block;
+  background-color: #4a9cbf;
+  color: #fefefe;
+  outline-offset: 5px;
+  border: none;
+  border-radius: 0.25em;
+  cursor: pointer;
+  font-family: "Catamaran", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0.5em 0;
+  padding: 0.5em 1em;
+  box-shadow: 0 0.25em 1em rgba(0, 0, 0, 0.1);
+}
+
+/* Click effect for buttons */
+.btn:active {
+  box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.2);
+  transform: translateY(0.25em);
+}
+
+.btn svg {
+  width: 1em;
+  height: 1em;
+  stroke: #fefefe;
+}
+
+.chevron {
+  font-size: 1rem;
+}
+
+.chevron-right {
+  margin-left: -4px;
+}
+
+form label {
+  display: block;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="date"] {
+  font-size: 1rem;
+  line-height: 2.25;
+  width: 100%;
+  font-family: "Catamaran", sans-serif;
+  padding-left: 0.5em;
+}
+
+fieldset {
+  border: none;
+  margin-left: 0;
+  margin-top: 0.5em;
+  padding: 0;
+}
+
+.error {
+  color: #da0505;
+  font-size: 0.85rem;
+  margin-top: 0.25em;
+}
+
+/* Landing section */
+#landing-page {
+  text-align: center;
+}
+
+h1 {
+  font-size: 3rem;
+  margin: auto 0;
+  color: #4a9cbf;
+}
+
+#landing-heading {
+  font-family: "Lobster Two", sans-serif;
+}
+
+#landing-page .btn {
+  width: 100%;
+}
+
+#landing-page dialog {
+  height: 75%;
+  text-align: left;
+  overflow: hidden;
+}
+
+#landing-page dialog h3 {
+  font-size: 1rem;
+  margin-top: 2em;
+}
+
+#landing-page dialog form {
+  height: 90%;
+}
+
+#landing-page dialog textarea {
+  font-family: "Catamaran", sans-serif;
+  width: 100%;
+  height: 50%;
+}
+
+#landing-page dialog .close {
+  width: initial;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  color: #4a9cbf;
+}
+
+/* Your details section */
+#details-form fieldset label {
+  display: inline;
+  margin-right: 1em;
+}
+
+.three-fields {
+  margin-top: 0.5em;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+}
+
+.form-buttons .btn {
+  width: 48%;
+}
+
+/* Your activity levels section */
+.walking-level-cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 1em;
+}
+
+.walking-level-cards .card + .card {
+  margin-top: 1em;
+}
+
+.walking-level-cards label {
+  font-size: 1rem;
+}
+
+.walking-level-cards .image-container svg {
+  width: 75%;
+  padding: 0.5em;
+  border: 2px solid #36454f;
+  border-radius: 50%;
+}
+
+.walking-level-cards input[type="radio"] {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.walking-level-cards .card input:checked + label::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 90%;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 100%;
+  outline: 0.25em solid #4a9cbf;
+  outline-offset: 0.25em;
+  border-radius: 20px;
+}
+
+#activity-level-form .walking-level-cards .card {
+  position: relative;
+}
+
+#activity-level-form .walking-level-cards .card input:checked {
+  border: 0.25em solid #4a9cbf;
+}
+
+#activity-level-form .walking-level-cards .card input:checked::after {
+  content: "HELLO";
+  opacity: 100%;
+  font-size: 10px;
+}
+
+#activity-level-form .walking-level-cards .card p {
+  font-size: 0.75rem;
+  margin-top: 0.5em;
+  font-style: italic;
+}
+
+/* Goal details section */
+.days-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.days-container label {
+  border-radius: 50%;
+  position: relative;
+  border: 1px solid #36454f;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+}
+
+.day-available-container {
+  position: relative;
+}
+
+.days-container input {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  margin: 0;
+}
+
+.days-container input[type="checkbox"]:focus + label {
+  outline: 2px solid #4a9cbf;
+  outline-offset: 0.15em;
+}
+
+.days-container input[type="checkbox"]:checked + label {
+  background-color: #4a9cbf;
+  border-color: #4a9cbf;
+  color: white;
+}
+
+/* 404 page */
+#page-not-found-content,
+#goal-results {
+  text-align: center;
+}
+
+#page-not-found-content h1 {
+  font-size: 2rem;
+  margin-bottom: 1em;
+}
+
+a.back-home,
+a.generate-plan {
+  text-align: center;
+  text-decoration: none;
+}
+
+/* Goal results page */
+#goal-results h1 {
+  font-size: 2rem;
+}
+
+#goal-results h1 + p {
+  margin-top: 0;
+}
+
+#goal-results p span {
+  font-weight: 700;
+  color: #4a9cbf;
+}
+
+#export-goal {
+  position: relative;
+}
+
+.copied {
+  position: absolute;
+  top: -115%;
+  left: 0;
+  opacity: 1;
+  padding: 0.25em;
+  border-radius: 10px;
+  color: #4a9cbf;
+  box-shadow: 0 0.25em 1em rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  font-size: 0.75rem;
+  margin-top: 0.25em;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Media queries */
+@media screen and (min-width: 749px) {
+  /* Global styles */
+  .container {
+    width: 85%;
+  }
+
+  /* Activity level */
+  .walking-level-cards {
+    flex-direction: row;
+  }
+
+  .walking-level-cards .card + .card {
+    margin-top: 0;
+  }
+
+  .walking-level-cards label svg {
+    width: 80%;
+  }
+
+  /* Goal details */
+  .days-container {
+    width: 60%;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  /* Global styles */
+  .container {
+    display: flex;
+    min-height: 75%;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 1000px;
+  }
+
+  section {
+    padding: initial;
+  }
+
+  section .image-container {
+    width: 45%;
+  }
+
+  section .content-container {
+    margin-left: 2em;
+    width: 65%;
+  }
+
+  .walking-level-cards .content-container {
+    margin: 0 auto;
+  }
+
+  h2,
+  h3 {
+    text-align: initial;
+  }
+
+  /* Landing */
+  #landing-page {
+    text-align: initial;
+  }
+
+  #landing-page .btn.cta {
+    display: inline-block;
+    width: 48%;
+  }
+
+  #import-a-goal {
+    margin-left: 0.5em;
+  }
+
+  #landing-page dialog {
+    height: 50%;
+    width: 75%;
+  }
+
+  #landing-page dialog form {
+    height: 80%;
+  }
+
+  #landing-page dialog textarea {
+    height: 60%;
+  }
+
+  /* Your details */
+  .two-fields {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .two-fields .field-container {
+    width: 48%;
+  }
+
+  .three-fields {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .three-fields .field-container {
+    width: 30%;
+  }
+
+  /* Activity level */
+  .walking-level-cards .image-container {
+    width: 75%;
+  }
+
+  .walking-level-cards label {
+    font-size: 0.8rem;
+  }
+
+  /* Goal details */
+  .days-container {
+    width: 70%;
+  }
+
+  /* 404 page */
+  #page-not-found-content container {
+    max-width: 600px;
+  }
+
+  #page-not-found-content .image-container {
+    width: 55%;
+  }
+
+  #page-not-found-content .content-container {
+    width: 45%;
+  }
+
+  /* Goal results page */
+  #goal-results {
+    text-align: left;
+  }
+}
