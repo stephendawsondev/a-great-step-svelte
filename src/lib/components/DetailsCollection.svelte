@@ -51,7 +51,7 @@
 					</div>
 				</div>
 				<div class="form-buttons">
-					<button class="btn back">
+					<a href="/" class="btn back">
 						<span aria-hidden="true" class="chevron chevron-left"
 							><svg fill="none" xmlns="http://www.w3.org/2000/svg">
 								<g>
@@ -65,8 +65,8 @@
 							</svg>
 						</span>
 						Back
-					</button>
-					<button class="btn next">
+					</a>
+					<a href="/activity-level" class="btn next">
 						Next<span aria-hidden="true" class="chevron chevron-right">
 							<svg fill="none" xmlns="http://www.w3.org/2000/svg">
 								<g>
@@ -79,9 +79,42 @@
 								</g>
 							</svg>
 						</span>
-					</button>
+					</a>
 				</div>
 			</form>
 		</div>
 	</div>
 </section>
+
+<style>
+	/* Your details section */
+	#details-form fieldset label {
+		display: inline;
+		margin-right: 1em;
+	}
+
+	.three-fields {
+		margin-top: 0.5em;
+	}
+
+	@media screen and (min-width: 900px) {
+		/* Your details */
+		.two-fields {
+			display: flex;
+			justify-content: space-between;
+		}
+
+		.two-fields .field-container {
+			width: 48%;
+		}
+
+		.three-fields {
+			display: flex;
+			justify-content: space-between;
+		}
+
+		.three-fields .field-container {
+			width: 30%;
+		}
+	}
+</style>

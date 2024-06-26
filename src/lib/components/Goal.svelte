@@ -98,7 +98,7 @@
 					</div>
 				</div>
 				<div class="form-buttons">
-					<button class="btn back">
+					<a href="/activity-level" class="btn back">
 						<span aria-hidden="true" class="chevron chevron-left">
 							<svg fill="none" xmlns="http://www.w3.org/2000/svg">
 								<g>
@@ -112,10 +112,80 @@
 							</svg>
 						</span>
 						Back
-					</button>
-					<button class="btn next">Generate plan</button>
+					</a>
+					<a href="/walking-goal" class="btn next">Generate plan</a>
 				</div>
 			</form>
 		</div>
 	</div>
 </section>
+
+<style>
+	/* Goal details section */
+	.days-container {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.days-container label {
+		border-radius: 50%;
+		position: relative;
+		border: 1px solid #36454f;
+		width: 30px;
+		height: 30px;
+		text-align: center;
+	}
+
+	.day-available-container {
+		position: relative;
+	}
+
+	.days-container input {
+		opacity: 0;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		cursor: pointer;
+		margin: 0;
+	}
+
+	.days-container input[type='checkbox']:focus + label {
+		outline: 2px solid #4a9cbf;
+		outline-offset: 0.15em;
+	}
+
+	.days-container input[type='checkbox']:checked + label {
+		background-color: #4a9cbf;
+		border-color: #4a9cbf;
+		color: white;
+	}
+
+	@media screen and (min-width: 749px) {
+		/* Goal details */
+		.days-container {
+			width: 60%;
+		}
+	}
+
+	@media screen and (min-width: 900px) {
+		/* Goal details */
+		.days-container {
+			width: 70%;
+		}
+
+		/* 404 page */
+		#page-not-found-content container {
+			max-width: 600px;
+		}
+
+		#page-not-found-content .image-container {
+			width: 55%;
+		}
+
+		#page-not-found-content .content-container {
+			width: 45%;
+		}
+	}
+</style>

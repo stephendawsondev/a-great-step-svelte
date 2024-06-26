@@ -25,3 +25,92 @@
 		</form>
 	</dialog>
 </section>
+
+<style>
+	@font-face {
+		font-family: 'Lobster Two';
+		font-style: normal;
+		font-weight: 500;
+		src: url('/fonts/Lobster_Two/LobsterTwo-Bold.ttf') format('truetype');
+	}
+
+	/* Landing section */
+	#landing-page {
+		text-align: center;
+	}
+
+	h1 {
+		font-size: 3rem;
+		margin: auto 0;
+		color: #4a9cbf;
+	}
+
+	#landing-heading {
+		font-family: 'Lobster Two', sans-serif;
+	}
+
+	#landing-page .btn {
+		width: 100%;
+	}
+
+	#landing-page dialog {
+		height: 75%;
+		text-align: left;
+		overflow: hidden;
+	}
+
+	#landing-page dialog h3 {
+		font-size: 1rem;
+		margin-top: 2em;
+	}
+
+	#landing-page dialog form {
+		height: 90%;
+	}
+
+	#landing-page dialog textarea {
+		font-family: 'Catamaran', sans-serif;
+		width: 100%;
+		height: 50%;
+	}
+
+	#landing-page dialog .close {
+		width: initial;
+		border: none;
+		box-shadow: none;
+		background: transparent;
+		position: absolute;
+		top: 0.5em;
+		right: 0.5em;
+		color: #4a9cbf;
+	}
+
+	@media screen and (min-width: 900px) {
+		/* Landing */
+		#landing-page {
+			text-align: initial;
+		}
+
+		#landing-page .btn.cta {
+			display: inline-block;
+			width: 48%;
+		}
+
+		#import-a-goal {
+			margin-left: 0.5em;
+		}
+
+		#landing-page dialog {
+			height: 50%;
+			width: 75%;
+		}
+
+		#landing-page dialog form {
+			height: 80%;
+		}
+
+		#landing-page dialog textarea {
+			height: 60%;
+		}
+	}
+</style>
