@@ -11,7 +11,7 @@
 		<div class="content-container">
 			<h1 id="landing-heading">A Great Step</h1>
 			<h2 class="subheading1">Walk your way to your fitness goals</h2>
-			<button id="create-a-goal" class="btn cta next">Create a goal </button>
+			<a href="/details" id="create-a-goal" class="btn cta next">Create a goal </a>
 			<button id="import-a-goal" class="btn cta">Import a goal</button>
 		</div>
 	</div>
