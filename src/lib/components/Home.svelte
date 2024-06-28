@@ -57,6 +57,33 @@
 		height: 75%;
 		text-align: left;
 		overflow: hidden;
+		opacity: 0;
+		transition-property: overlay display opacity;
+		transition-duration: 0.5s;
+		transition-behavior: allow-discrete;
+	}
+
+	#landing-page dialog[open] {
+		display: block;
+		opacity: 1;
+
+		@starting-style {
+			opacity: 0;
+		}
+	}
+
+	#landing-page dialog::backdrop {
+		background: rgba(0, 0, 0, 0.3);
+		transition:
+			display 0.7s allow-discrete,
+			overlay 0.7s allow-discrete,
+			background-color 0.7s;
+	}
+
+	@starting-style {
+		#landing-page dialog[open]::backdrop {
+			background-color: rgba(0, 0, 0, 0.3);
+		}
 	}
 
 	#landing-page dialog h3 {
