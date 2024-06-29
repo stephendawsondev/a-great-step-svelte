@@ -8,6 +8,12 @@ export class LocalStorage {
 	value = $state();
 	key = '';
 
+	/**
+	 * Creates an instance of LocalStorage.
+	 * @param {string} key
+	 * @param {Object} value
+	 * @memberof LocalStorage
+	 */
 	constructor(key, value) {
 		this.key = key;
 		this.value = value;
