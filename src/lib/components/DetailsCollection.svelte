@@ -1,5 +1,9 @@
 <script>
-	import DetailsCollectionSvg from './svgs/DetailsCollectionSvg.svelte';
+	import { getUserContext } from '$lib/index.svelte';
+	import DetailsCollectionSvg from '$lib/svgs/DetailsCollectionSvg.svelte';
+
+	const userData = getUserContext();
+	$inspect(userData);
 </script>
 
 <!-- Details form - collection user's personal details -->
@@ -14,40 +18,90 @@
 				<div class="two-fields">
 					<div class="field-container">
 						<label for="first-name">First name</label>
-						<input id="first-name" name="first-name" placeholder="John" type="text" required />
+						<input
+							id="first-name"
+							name="first-name"
+							type="text"
+							bind:value={userData.firstName}
+							required
+						/>
 					</div>
 					<div class="field-container">
 						<label for="last-name">Last name</label>
-						<input id="last-name" name="last-name" placeholder="Smith" type="text" />
+						<input
+							id="last-name"
+							name="last-name"
+							type="text"
+							bind:value={userData.lastName}
+							required
+						/>
 					</div>
 				</div>
-				<label for="email">Email</label>
-				<input id="email" name="email" placeholder="john_smith@gmail.com" type="email" />
-				<div class="radio-buttons">
-					<fieldset>
-						<legend>Gender</legend>
-						<label>
-							<input type="radio" id="male" value="male" name="gender" required />
-							Male
-						</label>
-						<label>
-							<input type="radio" id="female" value="female" name="gender" />
-							Female
-						</label>
-					</fieldset>
+				<div>
+					<label for="email">Email</label>
+					<input
+						id="email"
+						name="email"
+						placeholder="john_smith@gmail.com"
+						type="email"
+						bind:group={userData.gender}
+						bind:value={userData.email}
+						required
+					/>
 				</div>
+				<fieldset>
+					<legend>Gender</legend>
+					<label>
+						<input type="radio" value="male" name="gender" checked={userData.gender === 'male'} />
+						Male
+					</label>
+					<label>
+						<input
+							type="radio"
+							value="female"
+							name="gender"
+							bind:group={userData.gender}
+							checked={userData.gender === 'female'}
+						/>
+						Female
+					</label>
+				</fieldset>
 				<div class="three-fields">
 					<div class="field-container">
 						<label for="age">Age</label>
-						<input id="age" name="age" type="number" min="12" max="100" required />
+						<input
+							bind:value={userData.age}
+							id="age"
+							name="age"
+							type="number"
+							min="12"
+							max="100"
+							required
+						/>
 					</div>
 					<div class="field-container">
 						<label for="height">Height (cm)</label>
-						<input id="height" name="height" type="number" min="50" max="250" required />
+						<input
+							bind:value={userData.height}
+							id="height"
+							name="height"
+							type="number"
+							min="50"
+							max="250"
+							required
+						/>
 					</div>
 					<div class="field-container">
 						<label for="weight">Weight (kg)</label>
-						<input id="weight" name="weight" type="number" min="50" max="600" required />
+						<input
+							bind:value={userData.weight}
+							id="weight"
+							name="weight"
+							type="number"
+							min="50"
+							max="600"
+							required
+						/>
 					</div>
 				</div>
 				<div class="form-buttons">

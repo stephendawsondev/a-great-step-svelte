@@ -1,4 +1,5 @@
 import { browser } from '$app/environment';
+import { setContext, getContext } from 'svelte';
 
 /**
  * Local storage class
@@ -47,4 +48,16 @@ export class LocalStorage {
 	deserialise(value) {
 		return JSON.parse(value);
 	}
+}
+
+const USER_DATA = 'USER_DATA';
+
+export function setUserContext(value) {
+	const userData = new LocalStorage('userData', value);
+	setContext(USER_DATA, userData.value);
+	return userData.value;
+}
+
+export function getUserContext() {
+	return getContext(USER_DATA);
 }

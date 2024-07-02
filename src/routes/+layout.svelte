@@ -1,7 +1,22 @@
 <script>
 	import { onNavigate } from '$app/navigation';
+	import { setUserContext } from '$lib/index.svelte';
 
 	let { children } = $props();
+
+	let userData = setUserContext({
+		firstName: '',
+		lastName: '',
+		email: '',
+		gender: 'male',
+		age: '',
+		height: '',
+		weight: '',
+		daysAvailable: [],
+		walkingFrequency: '',
+		targetWeight: '',
+		targetDate: ''
+	});
 
 	onNavigate(() => {
 		if (!document.startViewTransition) return;

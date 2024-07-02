@@ -1,8 +1,11 @@
 <script>
-	import ActivityLevelSvg from './svgs/ActivityLevelSvg.svelte';
-	import ManySteps from './svgs/ManySteps.svelte';
-	import MediumSteps from './svgs/MediumSteps.svelte';
-	import SmallSteps from './svgs/SmallSteps.svelte';
+	import { getUserContext } from '$lib/index.svelte';
+	import ActivityLevelSvg from '$lib/svgs/ActivityLevelSvg.svelte';
+	import ManySteps from '$lib/svgs/ManySteps.svelte';
+	import MediumSteps from '$lib/svgs/MediumSteps.svelte';
+	import SmallSteps from '$lib/svgs/SmallSteps.svelte';
+
+	let userData = getUserContext();
 </script>
 
 <!-- Activity level - Gauge user's fitness level -->
@@ -13,7 +16,7 @@
 		</div>
 		<div class="content-container">
 			<h2 id="activity-level-heading" class="section-title">Your activity level</h2>
-			<form action="#" method="post">
+			<form method="post">
 				<fieldset>
 					<legend>Walking frequency</legend>
 					<div class="walking-level-cards">
@@ -27,6 +30,8 @@
 									value="walk-a-little"
 									type="radio"
 									name="walking-frequency"
+									checked={userData.walkingFrequency === 'walk-a-little'}
+									bind:group={userData.walkingFrequency}
 									required
 								/>
 								<label for="walk-a-little">I walk a little</label>
@@ -38,7 +43,14 @@
 								<MediumSteps />
 							</div>
 							<div class="content-container">
-								<input id="walk-often" value="walk-often" type="radio" name="walking-frequency" />
+								<input
+									id="walk-often"
+									value="walk-often"
+									type="radio"
+									name="walking-frequency"
+									checked={userData.walkingFrequency === 'walk-often'}
+									bind:group={userData.walkingFrequency}
+								/>
 								<label for="walk-often">I walk often</label>
 								<p>(3-4 times a week)</p>
 							</div>
@@ -48,7 +60,14 @@
 								<ManySteps />
 							</div>
 							<div class="content-container">
-								<input id="walk-a-lot" value="walk-a-lot" type="radio" name="walking-frequency" />
+								<input
+									id="walk-a-lot"
+									value="walk-a-lot"
+									type="radio"
+									name="walking-frequency"
+									checked={userData.walkingFrequency === 'walk-a-lot'}
+									bind:group={userData.walkingFrequency}
+								/>
 								<label for="walk-a-lot">I walk a lot</label>
 								<p>(5+ times per week)</p>
 							</div>

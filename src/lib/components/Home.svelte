@@ -1,5 +1,24 @@
 <script>
-	import HomeSvg from '$lib/components/svgs/HomeSvg.svelte';
+	import { getUserContext } from '$lib/index.svelte';
+	import HomeSvg from '$lib/svgs/HomeSvg.svelte';
+
+	let userData = getUserContext();
+
+	/** @type {HTMLDialogElement|null} */
+	let inputDialog;
+
+	/** @type {string} */
+	let existingData = $state('');
+
+	/**
+	 * Import existing goal data
+	 * @param {string} jsonString
+	 * @returns void
+	 */
+	function importData(jsonString) {
+		const data = JSON.parse(jsonString);
+		userData = data;
+	}
 </script>
 
 <!-- Landing page - the first view for the user -->
@@ -12,14 +31,16 @@
 			<h1 id="landing-heading">A Great Step</h1>
 			<h2 class="subheading1">Walk your way to your fitness goals</h2>
 			<a href="/details" id="create-a-goal" class="btn cta next">Create a goal </a>
-			<button id="import-a-goal" class="btn cta">Import a goal</button>
+			<button id="import-a-goal" class="btn cta" onclick={() => inputDialog?.showModal()}
+				>Import a goal</button
+			>
 		</div>
 	</div>
 	<!-- Modal for importing existing goal -->
-	<dialog>
+	<dialog bind:this={inputDialog}>
 		<h3 class="modal-title">Add your goal's JSON data</h3>
 		<form id="import-form" method="dialog">
-			<textarea placeholder="Paste your goal's JSON data here"></textarea>
+			<textarea placeholder="Paste your goal's JSON data here">{existingData}</textarea>
 			<button class="btn close">X</button>
 			<button class="btn">Show me my goal!</button>
 		</form>

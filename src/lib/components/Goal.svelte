@@ -1,5 +1,17 @@
 <script>
-	import GoalSvg from './svgs/GoalSvg.svelte';
+	import { getUserContext } from '$lib/index.svelte';
+	import GoalSvg from '$lib/svgs/GoalSvg.svelte';
+
+	let userData = getUserContext();
+
+	function updateDaysArray(event) {
+		const { value, checked } = event.target;
+		if (checked) {
+			userData.daysAvailable = [...userData.daysAvailable, value];
+		} else {
+			userData.daysAvailable = userData.daysAvailable.filter((day) => day !== value);
+		}
+	}
 </script>
 
 <section id="goal-form" aria-labelledby="goal-details-heading">
@@ -18,10 +30,17 @@
 					min="50"
 					max="550"
 					placeholder=" 75"
+					bind:value={userData.targetWeight}
 					required
 				/>
 				<label for="target-date">When do you want to achieve your goal by?</label>
-				<input type="date" name="target-date" id="target-date" required />
+				<input
+					type="date"
+					name="target-date"
+					id="target-date"
+					bind:value={userData.targetDate}
+					required
+				/>
 				<div class="days-of-the-week">
 					<p>Select the days you can exercise</p>
 					<div class="days-container">
@@ -32,6 +51,7 @@
 								id="monday"
 								name="days-available"
 								title="Monday"
+								onclick={(e) => updateDaysArray(e)}
 							/>
 							<label for="monday">M</label>
 						</div>
@@ -42,6 +62,7 @@
 								id="tuesday"
 								name="days-available"
 								title="Tuesday"
+								onclick={(e) => updateDaysArray(e)}
 							/>
 							<label for="tuesday">T</label>
 						</div>
@@ -52,6 +73,7 @@
 								id="wednesday"
 								name="days-available"
 								title="Wednesday"
+								onclick={(e) => updateDaysArray(e)}
 							/>
 							<label for="wednesday">W</label>
 						</div>
@@ -62,6 +84,7 @@
 								id="thursday"
 								name="days-available"
 								title="Thursday"
+								onclick={(e) => updateDaysArray(e)}
 							/>
 							<label for="thursday">T</label>
 						</div>
@@ -72,6 +95,7 @@
 								id="friday"
 								name="days-available"
 								title="Friday"
+								onclick={(e) => updateDaysArray(e)}
 							/>
 							<label for="friday">F</label>
 						</div>
@@ -82,6 +106,7 @@
 								id="saturday"
 								name="days-available"
 								title="Saturday"
+								onclick={(e) => updateDaysArray(e)}
 							/>
 							<label for="saturday">S</label>
 						</div>
@@ -92,6 +117,7 @@
 								id="sunday"
 								name="days-available"
 								title="Sunday"
+								onclick={(e) => updateDaysArray(e)}
 							/>
 							<label for="sunday">S</label>
 						</div>
