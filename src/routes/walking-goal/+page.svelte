@@ -1,5 +1,5 @@
 <script>
-	import WalkingGoalSvg from '$lib/components/svgs/WalkingGoalSvg.svelte';
+	import WalkingGoalSvg from '$lib/svgs/WalkingGoalSvg.svelte';
 </script>
 
 <!-- Goal results page -->

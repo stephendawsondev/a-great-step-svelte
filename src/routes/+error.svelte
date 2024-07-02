@@ -1,6 +1,6 @@
 <script>
 	import { page } from '$app/stores';
-	import ErrorPageSvg from '$lib/components/svgs/ErrorPageSvg.svelte';
+	import ErrorPageSvg from '$lib/svgs/ErrorPageSvg.svelte';
 </script>
 
 <!-- Page not found page -->
