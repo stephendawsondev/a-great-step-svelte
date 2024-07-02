@@ -34,9 +34,7 @@
 				</p>
 			</div>
 
-			<a href="/A-Great-Step/index.html" class="btn cta back-home" aria-label="Return to home page"
-				>Return home</a
-			>
+			<a href="/" class="btn cta back-home" aria-label="Return to home page">Return home</a>
 			<button id="export-goal" class="btn cta" aria-label="Export goal JSON"> Export Goal </button>
 		</div>
 	</div>
