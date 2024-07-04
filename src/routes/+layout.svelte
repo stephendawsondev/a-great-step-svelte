@@ -64,14 +64,12 @@
 	}
 
 	:root::view-transition-old(root) {
-		animation:
-			1.5s cubic-bezier(0.4, 0, 1, 1) both fade-out,
-			1s cubic-bezier(0.4, 0, 0.2, 1) both slide-to-top;
+		animation: 0.5s cubic-bezier(0.4, 0, 1, 1) both fade-out;
+		/* 1s cubic-bezier(0.4, 0, 0.2, 1) both slide-to-top; */
 	}
 
 	:root::view-transition-new(root) {
-		animation:
-			1.5s cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
-			1s cubic-bezier(0.4, 0, 0.2, 1) both slide-from-bottom;
+		animation: 0.5s cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in;
+		/* 1s cubic-bezier(0.4, 0, 0.2, 1) both slide-from-bottom; */
 	}
 </style>
