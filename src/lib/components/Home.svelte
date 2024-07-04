@@ -11,13 +11,73 @@
 	let existingData = $state('');
 
 	/**
+	 * Handles the submission of the import form. It will check
+	 * the JSON input and update the goal object in LocalStorage.
+	 */
+	const handleImportSubmit = async (event, value) => {
+		const importTextarea = document.querySelector('#import-form textarea');
+		const textareaValue = importTextarea.value.trim();
+
+		if (!textareaValue) return;
+		// detructure object with error and isValid properties
+		const { isValid, error } = validateJsonInput(textareaValue);
+
+		if (isValid) {
+			let textAreaObj = JSON.parse(textareaValue);
+			let valueKeys = Object.keys(textAreaObj);
+
+			for (const valueKey of valueKeys) {
+				userData[valueKey] = textAreaObj[valueKey];
+			}
+
+			// Clear the textarea after submission
+			importTextarea.value = '';
+
+			// clear errors
+			const errorElement = document?.querySelector('.error');
+			if (errorElement) errorElement.remove();
+
+			return value;
+		} else {
+			event.preventDefault();
+			// display error message above text area
+			if (document.querySelector('.error')) return;
+			const errorElement = document.createElement('p');
+			errorElement.classList.add('error');
+			errorElement.textContent =
+				'The JSON you entered is invalid. JSON should be formatted like this: {"key": "value"}.';
+
+			// https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentElement resource
+			// used
+			importTextarea.insertAdjacentElement('beforebegin', errorElement);
+
+			// log the error to the console
+			console.error(error);
+		}
+	};
+
+	/**
+	 * Validate the JSON input of an existing goal. If the JSON is
+	 * valid, it will update the goal object in LocalStorage.
+	 */
+	const validateJsonInput = (inputText) => {
+		try {
+			JSON.parse(inputText);
+			return { isValid: true, error: null };
+		} catch (error) {
+			return { isValid: false, error: error.message };
+		}
+	};
+
+	/**
 	 * Import existing goal data
 	 * @param {string} jsonString
 	 * @returns void
 	 */
 	function importData(jsonString) {
-		const data = JSON.parse(jsonString);
-		userData = data;
+		console.log('importing data', jsonString);
+		console.log('userData', userData);
+		userData = JSON.stringify(jsonString);
 	}
 </script>
 
@@ -39,7 +99,7 @@
 	<!-- Modal for importing existing goal -->
 	<dialog bind:this={inputDialog}>
 		<h3 class="modal-title">Add your goal's JSON data</h3>
-		<form id="import-form" method="dialog">
+		<form id="import-form" method="dialog" onsubmit={(e) => handleImportSubmit(e, existingData)}>
 			<textarea placeholder="Paste your goal's JSON data here">{existingData}</textarea>
 			<button class="btn close">X</button>
 			<button class="btn">Show me my goal!</button>

@@ -1,9 +1,9 @@
 <script>
 	import { getUserContext } from '$lib/index.svelte';
+	import { handleFormValidation } from '$lib/js/script.js';
 	import DetailsCollectionSvg from '$lib/svgs/DetailsCollectionSvg.svelte';
 
 	const userData = getUserContext();
-	$inspect(userData);
 </script>
 
 <!-- Details form - collection user's personal details -->
@@ -44,7 +44,6 @@
 						name="email"
 						placeholder="john_smith@gmail.com"
 						type="email"
-						bind:group={userData.gender}
 						bind:value={userData.email}
 						required
 					/>
@@ -52,7 +51,13 @@
 				<fieldset>
 					<legend>Gender</legend>
 					<label>
-						<input type="radio" value="male" name="gender" checked={userData.gender === 'male'} />
+						<input
+							type="radio"
+							value="male"
+							name="gender"
+							bind:group={userData.gender}
+							checked={userData.gender === 'male'}
+						/>
 						Male
 					</label>
 					<label>
@@ -120,7 +125,7 @@
 						</span>
 						Back
 					</a>
-					<a href="/activity-level" class="btn next">
+					<a href="/activity-level" class="btn next" onclick={(e) => handleFormValidation(e)}>
 						Next<span aria-hidden="true" class="chevron chevron-right">
 							<svg fill="none" xmlns="http://www.w3.org/2000/svg">
 								<g>

@@ -1,5 +1,6 @@
 <script>
 	import { getUserContext } from '$lib/index.svelte';
+	import { handleFormValidation } from '$lib/js/script.js';
 	import GoalSvg from '$lib/svgs/GoalSvg.svelte';
 
 	let userData = getUserContext();
@@ -12,6 +13,124 @@
 			userData.daysAvailable = userData.daysAvailable.filter((day) => day !== value);
 		}
 	}
+
+	const displayErrorMessage = (error, element) => {
+		if (document.querySelector('.error')) {
+			const errorElement = document?.querySelector('.error');
+			errorElement.textContent = error;
+			return;
+		}
+
+		const errorElement = document.createElement('p');
+		errorElement.classList.add('error');
+		errorElement.style.textAlign = 'right';
+		errorElement.textContent = error;
+		document.querySelector('.form-buttons').after(errorElement);
+
+		if (element.parent) {
+			element.parent.append(errorElement);
+		}
+		return [false, error];
+	};
+
+	const validateWeight = (weightField) => {
+		if (Number(weightField.value) < Number(weightField.min)) {
+			displayErrorMessage(`Your weight must be greater than ${weightField.min}kg.`, weightField);
+			return [false, ''];
+		} else {
+			if (document.querySelector('.error')) {
+				const errorElement = document.querySelector('.error');
+				errorElement.remove();
+			}
+		}
+		if (Number(weightField.value) >= Number(userData.weight)) {
+			displayErrorMessage('Your target weight must be less than your current weight.', weightField);
+			return [false, ''];
+		} else {
+			if (document.querySelector('.error')) {
+				const errorElement = document.querySelector('.error');
+				errorElement.remove();
+			}
+		}
+
+		userData.targetWeight = weightField.value;
+		return [true, ''];
+	};
+
+	const validateDate = (dateField) => {
+		if (dateField.value < new Date().toISOString().split('T')[0]) {
+			displayErrorMessage('Your target date must be in the future.', dateField);
+			return [false, ''];
+		}
+		return [true, ''];
+	};
+
+	/**
+	 * Checks the goal object in LocalStorage to ensure all required
+	 * fields are complete. If not, it returns an array with 'false'
+	 * and an error message.
+	 */
+	const checkGoalRequiredFields = (goalObj, requiredFieldsArr) => {
+		const goalKeys = Object.keys(goalObj);
+		const missingFields = [];
+
+		for (const field of requiredFieldsArr) {
+			if (!goalKeys.includes(field)) {
+				missingFields.push(field);
+			}
+		}
+
+		if (missingFields.length > 0) {
+			const missingFieldsString = missingFields.join(', ');
+			return [false, `You are missing the following fields: ${missingFieldsString}.`];
+		}
+
+		return [true, goalObj];
+	};
+
+	/**
+	 * Handles the 'next' button click.
+	 */
+	const handleNextButtonClick = (event) => {
+		let requiredFields = [
+			'firstName',
+			'lastName',
+			'email',
+			'age',
+			'height',
+			'weight',
+			'targetWeight',
+			'targetDate',
+			'daysAvailable'
+		];
+
+		// validate the form inputs
+		const fieldsValid = handleFormValidation(event);
+
+		if (!fieldsValid) {
+			return;
+		}
+
+		const [isValid, error] = checkGoalRequiredFields(userData, requiredFields);
+		if (!isValid) {
+			// check if an error message already exists
+			if (document.querySelector('.error')) {
+				const errorElement = document?.querySelector('.error');
+				if (errorElement) errorElement.textContent = error;
+				return;
+			}
+			// display error message
+			const errorElement = document.createElement('p');
+			errorElement.classList.add('error');
+			errorElement.style.textAlign = 'right';
+			errorElement.textContent = error;
+			document.querySelector('.form-buttons')?.after(errorElement);
+			return;
+		} else {
+			// redirect the user to the goal page
+			event.target.click();
+		}
+	};
 </script>
 
 <section id="goal-form" aria-labelledby="goal-details-heading">
@@ -31,6 +150,7 @@
 					max="550"
 					placeholder=" 75"
 					bind:value={userData.targetWeight}
+					oninput={(e) => validateWeight(e.target)}
 					required
 				/>
 				<label for="target-date">When do you want to achieve your goal by?</label>
@@ -51,6 +171,7 @@
 								id="monday"
 								name="days-available"
 								title="Monday"
+								checked={userData.daysAvailable.includes('monday')}
 								onclick={(e) => updateDaysArray(e)}
 							/>
 							<label for="monday">M</label>
@@ -62,6 +183,7 @@
 								id="tuesday"
 								name="days-available"
 								title="Tuesday"
+								checked={userData.daysAvailable.includes('tuesday')}
 								onclick={(e) => updateDaysArray(e)}
 							/>
 							<label for="tuesday">T</label>
@@ -73,6 +195,7 @@
 								id="wednesday"
 								name="days-available"
 								title="Wednesday"
+								checked={userData.daysAvailable.includes('wednesday')}
 								onclick={(e) => updateDaysArray(e)}
 							/>
 							<label for="wednesday">W</label>
@@ -84,6 +207,7 @@
 								id="thursday"
 								name="days-available"
 								title="Thursday"
+								checked={userData.daysAvailable.includes('thursday')}
 								onclick={(e) => updateDaysArray(e)}
 							/>
 							<label for="thursday">T</label>
@@ -95,6 +219,7 @@
 								id="friday"
 								name="days-available"
 								title="Friday"
+								checked={userData.daysAvailable.includes('friday')}
 								onclick={(e) => updateDaysArray(e)}
 							/>
 							<label for="friday">F</label>
@@ -106,6 +231,7 @@
 								id="saturday"
 								name="days-available"
 								title="Saturday"
+								checked={userData.daysAvailable.includes('saturday')}
 								onclick={(e) => updateDaysArray(e)}
 							/>
 							<label for="saturday">S</label>
@@ -117,6 +243,7 @@
 								id="sunday"
 								name="days-available"
 								title="Sunday"
+								checked={userData.daysAvailable.includes('sunday')}
 								onclick={(e) => updateDaysArray(e)}
 							/>
 							<label for="sunday">S</label>
@@ -139,7 +266,9 @@
 						</span>
 						Back
 					</a>
-					<a href="/walking-goal" class="btn next">Generate plan</a>
+					<a href="/walking-goal" class="btn next" onclick={(e) => handleNextButtonClick(e)}
+						>Generate plan</a
+					>
 				</div>
 			</form>
 		</div>
@@ -199,19 +328,6 @@
 		/* Goal details */
 		.days-container {
 			width: 70%;
-		}
-
-		/* 404 page */
-		#page-not-found-content container {
-			max-width: 600px;
-		}
-
-		#page-not-found-content .image-container {
-			width: 55%;
-		}
-
-		#page-not-found-content .content-container {
-			width: 45%;
 		}
 	}
 </style>
