@@ -13,7 +13,7 @@
 		height: '',
 		weight: '',
 		daysAvailable: [],
-		walkingFrequency: '',
+		walkingFrequency: 'walk-a-little',
 		targetWeight: '',
 		targetDate: ''
 	});
